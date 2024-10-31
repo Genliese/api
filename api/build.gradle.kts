@@ -2,11 +2,13 @@ plugins {
     alias(libs.plugins.agp.lib)
     `maven-publish`
     signing
+//    kotlin("jvm") version "1.8.0"
+    kotlin("android") version "1.9.24" // Kotlin Android 插件
 }
 
 android {
     namespace = "io.github.libxposed.api"
-    compileSdk = 35
+    compileSdk = 34
     buildToolsVersion = "35.0.0"
 
     defaultConfig {
@@ -19,10 +21,17 @@ android {
         buildConfig = false
     }
 
+
     compileOptions {
-        targetCompatibility = JavaVersion.VERSION_1_8
-        sourceCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
+
+    kotlinOptions {
+        jvmTarget = "21" // 确保 Kotlin 的目标版本与 Java 一致
+    }
+
+
 
     publishing {
         singleVariant("release") {
